@@ -42,11 +42,19 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o11-mh-uHw" id="cs7-Oo-IHT">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EsJ-N6-sAX">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EsJ-N6-sAX">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                                     <color key="backgroundColor" red="0.89228219696969691" green="0.89228219696969691" blue="0.89228219696969691" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="zF1-Ml-39Z"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EsJ-N6-sAX" firstAttribute="top" secondItem="cs7-Oo-IHT" secondAttribute="top" id="D3d-VV-j2r"/>
+                                                <constraint firstAttribute="trailing" secondItem="EsJ-N6-sAX" secondAttribute="trailing" id="jIc-1O-czP"/>
+                                                <constraint firstItem="EsJ-N6-sAX" firstAttribute="leading" secondItem="cs7-Oo-IHT" secondAttribute="leading" id="y64-JQ-h5Y"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
