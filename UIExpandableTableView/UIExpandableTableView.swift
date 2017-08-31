@@ -13,40 +13,40 @@ class UIExpandableTableView : UITableView, HeaderViewDelegate {
     var sectionOpen:Int = NSNotFound
     
     // MARK: HeaderViewDelegate
-    func headerViewOpen(section: Int) {
+    func headerViewOpen(_ section: Int) {
         
         if self.sectionOpen != NSNotFound {
             headerViewClose(self.sectionOpen)
         }
         
         self.sectionOpen = section
-        var numberOfRows = self.dataSource?.tableView(self, numberOfRowsInSection: section)
-        var indexesPathToInsert:[NSIndexPath] = []
+        let numberOfRows = self.dataSource?.tableView(self, numberOfRowsInSection: section)
+        var indexesPathToInsert:[IndexPath] = []
         
-        for var i = 0; i < numberOfRows; i++ {
-            indexesPathToInsert.append(NSIndexPath(forRow: i, inSection: section))
+        for i in 0..<numberOfRows! {
+            indexesPathToInsert.append(IndexPath(row: i, section: section))
         }
         
         if indexesPathToInsert.count > 0 {
             self.beginUpdates()
-            self.insertRowsAtIndexPaths(indexesPathToInsert, withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.insertRows(at: indexesPathToInsert, with: UITableViewRowAnimation.automatic)
             self.endUpdates()
         }
     }
     
-    func headerViewClose(section: Int) {
+    func headerViewClose(_ section: Int) {
         
-        var numberOfRows = self.dataSource?.tableView(self, numberOfRowsInSection: section)
-        var indexesPathToDelete:[NSIndexPath] = []
+        let numberOfRows = self.dataSource?.tableView(self, numberOfRowsInSection: section)
+        var indexesPathToDelete:[IndexPath] = []
         self.sectionOpen = NSNotFound
         
-        for var i = 0 ; i < numberOfRows; i++ {
-            indexesPathToDelete.append(NSIndexPath(forRow: i, inSection: section))
+        for i in 0..<numberOfRows! {
+            indexesPathToDelete.append(IndexPath(row: i, section: section))
         }
         
         if indexesPathToDelete.count > 0 {
             self.beginUpdates()
-            self.deleteRowsAtIndexPaths(indexesPathToDelete, withRowAnimation: UITableViewRowAnimation.Top)
+            self.deleteRows(at: indexesPathToDelete, with: UITableViewRowAnimation.top)
             self.endUpdates()
         }
     }
