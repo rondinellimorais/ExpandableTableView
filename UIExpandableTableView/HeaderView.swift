@@ -9,8 +9,8 @@
 import UIKit
 
 protocol HeaderViewDelegate: NSObjectProtocol {
-    func headerViewOpen(section:Int)
-    func headerViewClose(section:Int)
+    func headerViewOpen(_ section:Int)
+    func headerViewClose(_ section:Int)
 }
 
 class HeaderView: UIView {
@@ -21,8 +21,8 @@ class HeaderView: UIView {
     
     required init(tableView:UIExpandableTableView, section:Int){
         
-        var height = tableView.delegate?.tableView!(tableView, heightForHeaderInSection: section)
-        var frame = CGRectMake(0, 0, CGRectGetWidth(tableView.frame), height!)
+        let height = tableView.delegate?.tableView!(tableView, heightForHeaderInSection: section)
+        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: height!)
         
         super.init(frame: frame)
         
@@ -36,14 +36,14 @@ class HeaderView: UIView {
     }
     
     override func layoutSubviews() {
-        var toggleButton = UIButton()
-        toggleButton.addTarget(self, action: "toggle:", forControlEvents: UIControlEvents.TouchUpInside)
-        toggleButton.backgroundColor = UIColor.clearColor()
-        toggleButton.frame = CGRectMake(0, 0, self.frame.width, self.frame.height)
+        let toggleButton = UIButton()
+        toggleButton.addTarget(self, action: #selector(HeaderView.toggle(_:)), for: UIControlEvents.touchUpInside)
+        toggleButton.backgroundColor = UIColor.clear
+        toggleButton.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         self.addSubview(toggleButton)
     }
     
-    func toggle(sender:AnyObject){
+    func toggle(_ sender:AnyObject){
         
         if self.tableView!.sectionOpen != section! {
             self.delegate?.headerViewOpen(section!)
