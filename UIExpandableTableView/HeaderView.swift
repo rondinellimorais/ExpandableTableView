@@ -43,7 +43,7 @@ class HeaderView: UIView {
         self.addSubview(toggleButton)
     }
     
-    func toggle(_ sender:AnyObject){
+    @objc func toggle(_ sender:AnyObject){
         
         if self.tableView!.sectionOpen != section! {
             self.delegate?.headerViewOpen(section!)

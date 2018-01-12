@@ -19,24 +19,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         // create data
-        for var i = 0; i < Int(arc4random_uniform(100)); i++ {
+        for i in 0...Int(arc4random_uniform(100)) {
             items.append([])
-            for var j = 0; j < Int(arc4random_uniform(100)); j++ {
+            for j in 0...Int(arc4random_uniform(10)) {
                 items[i]!.append(j)
             }
         }
     }
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (!items.isEmpty) {
             if (self.tableView.sectionOpen != NSNotFound && section == self.tableView.sectionOpen) {
@@ -46,34 +46,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as! UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath as IndexPath)
         cell.textLabel?.text = "section \(indexPath.section) row \(indexPath.row)"
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        cell.textLabel?.backgroundColor = UIColor.clear
         return cell
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView = HeaderView(tableView: self.tableView, section: section)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = HeaderView(tableView: self.tableView, section: section)
         headerView.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(100)) / 100.0,
-                                           green: CGFloat(arc4random_uniform(100)) / 100.0,
-                                            blue: CGFloat(arc4random_uniform(255)) / 100.0,
-                                           alpha: 1)
+                                             green: CGFloat(arc4random_uniform(100)) / 100.0,
+                                             blue: CGFloat(arc4random_uniform(255)) / 100.0,
+                                             alpha: 1)
         
-        var label = UILabel(frame: headerView.frame)
+        let label = UILabel(frame: headerView.frame)
         label.text = "Section \(section), touch here!"
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         
         headerView.addSubview(label)
         
         return headerView
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 }
 
