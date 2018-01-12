@@ -29,6 +29,13 @@ class HeaderView: UIView {
         self.tableView = tableView
         self.delegate = tableView
         self.section = section
+        
+        if #available(iOS 11, *) {
+            self.tableView.estimatedRowHeight = 0;
+            self.tableView.estimatedSectionHeaderHeight = 0;
+            self.tableView.estimatedSectionFooterHeight = 0;
+        }
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
